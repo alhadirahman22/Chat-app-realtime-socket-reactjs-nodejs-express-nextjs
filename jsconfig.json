@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@Helpers/*" : ["./helpers/*"],
+        "@Styles/*" : ["./src/styles/*"],
+        "@Components/*": ["./components/*"],
+        "@Utils/*": ["./src/utils/*"],
+        "@Data/*":["./src/data/*"],
+        "@Font/*": ["./src/asset/font/*"]
+      }
+    }
+  }
+  
