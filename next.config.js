@@ -8,7 +8,7 @@ const nextConfig = {
     return config;
   },
   env: {
-
+    APP_KEY: process.env.APP_KEY,
   },
 };
 
