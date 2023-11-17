@@ -1,3 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+.input-text {
+    background-color: #F6F6F6;
+    @apply border rounded w-full p-2;
+}
