@@ -12,7 +12,7 @@
     position: relative;
     height: auto;
     background-color: #5DB075;
-    padding: 10px;
+    // padding: 10px;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
@@ -27,4 +27,29 @@
     bottom: -20px;
     border: 12px solid;
     border-color: #5DB075 #5DB075 transparent transparent;
+}
+
+.sender-user {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    height: auto;
+    background-color: #E8E8E8;
+    // padding: 10px;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.sender-user:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 0px;
+    right: auto;
+    top: auto;
+    bottom: -20px;
+    border: 22px solid;
+    border-color: transparent transparent transparent #E8E8E8;
 }
