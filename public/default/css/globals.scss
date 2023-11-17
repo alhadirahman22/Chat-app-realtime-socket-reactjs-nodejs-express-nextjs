@@ -5,3 +5,26 @@
     background-color: #F6F6F6;
     @apply border rounded w-full p-2;
 }
+
+.sender-self {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    height: auto;
+    background-color: #5DB075;
+    padding: 10px;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+.sender-self:after {
+    content: '';
+    position: absolute;
+    height: 0;
+    left: auto;
+    right: 0px;
+    bottom: -20px;
+    border: 12px solid;
+    border-color: #5DB075 #5DB075 transparent transparent;
+}
