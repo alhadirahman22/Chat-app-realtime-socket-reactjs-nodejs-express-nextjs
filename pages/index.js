@@ -4,7 +4,10 @@ import { useRouter } from 'next/router'
 import { useForm, Controller } from "react-hook-form";
 import Helper from "../helpers/index"
 import Swal from "sweetalert2";
+import io from 'socket.io-client';
 const Login = () => {
+    const [socket, setSocket] = useState(null);
+    const { isReady } = useRouter()
     const [processing, setProcessing] = useState(false);
     const router = useRouter();
     const {
@@ -21,6 +24,7 @@ const Login = () => {
             const post = { token: Helper.encJwt(data) };
             const res = await Helper.instance().post('/api/chat/join', post);
             if (res.data.status) {
+                socket.connect();
                 Helper.setLocalStorage("userData", res.data.data, true);
                 router.push("/" + data.roomid);
             }
@@ -40,6 +44,19 @@ const Login = () => {
         }
         setProcessing(false);
     };
+
+    useEffect(() => {
+        if (!isReady) return
+        setSocket(io(`${window.location.protocol}//${window.location.host}`));
+
+    }, [isReady]);
+
+    useEffect(() => {
+        if (socket != null) {
+            socket.disconnect();
+        }
+    }, [socket]);
+
     return (
         <>
             <Head>
@@ -107,8 +124,6 @@ const Login = () => {
                     </div>
                 </div >
             </form>
-
-
         </>
     )
 }

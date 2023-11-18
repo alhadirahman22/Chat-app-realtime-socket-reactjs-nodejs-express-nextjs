@@ -80,10 +80,6 @@ app.prepare().then(() => {
     return handle(req, res);
   });
 
-  // server.listen(port, '0.0.0.0', (err) => {
-  //   console.log(`> Ready on http://localhost:${port}`);
-  // });
-
   httpServer.listen(port, '0.0.0.0', (err) => {
     console.log(`> Ready on http://localhost:${port}`);
   });

@@ -1,6 +1,6 @@
 
 const config = {
-    mongo: "mongodb://127.0.0.1:27017/chat?useUnifiedTopology=true"
+    mongo: process.env.MONGOHOST
 }
 const mongoose = require('mongoose');
 mongoose.connect(config.mongo, { useNewUrlParser: true })

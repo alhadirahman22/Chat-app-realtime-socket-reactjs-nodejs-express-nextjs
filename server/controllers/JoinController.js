@@ -27,15 +27,28 @@ router.post('/join', async (req, res, next) => {
 
     // const ChatData = await Chat.findOne({ username: username, room: roomid });
     const UserData = await User.findOne({ username: username, room: roomid, status: 1 });
+    const UserDataCheck = await User.findOne({ username: username, room: roomid });
+    console.log("UserDataCheck", UserDataCheck);
     const room = roomid;
-    if (!UserData) {
+    if (!UserData || (UserDataCheck != null && UserDataCheck.status == 0)) {
         try {
             const user_id = Helper.uniqueId();
             const status = 1;
-            const d = await User.create({
-                username, user_id, room, status
-            });
-            return Helper.resSuccess(res, 'Retrieve', d)
+            if (UserDataCheck == null) {
+                const d = await User.create({
+                    username, user_id, room, status
+                });
+                return Helper.resSuccess(res, 'Retrieve', d)
+            }
+            else {
+                const updatedUser = await User.findOneAndUpdate(
+                    { username: username, room: room },
+                    { $set: { status: 1 } },
+                );
+                return Helper.resSuccess(res, 'Retrieve', updatedUser)
+            }
+
+
         } catch (error) {
             console.log("error,", error)
             return Helper.resError(res, 'Something wrong');
@@ -60,6 +73,23 @@ router.post('/create', async (req, res, next) => {
         return Helper.resError(res, 'Something wrong');
     }
 
+
+});
+
+
+router.post('/exit', async (req, res, next) => {
+    const { username, room } = req.body;
+    try {
+
+        const updatedUser = await User.findOneAndUpdate(
+            { username: username, room: room },
+            { $set: { status: 0 } },
+        );
+        return Helper.resSuccess(res, 'Retrieve', updatedUser)
+    } catch (error) {
+        console.log("error,", error)
+        return Helper.resError(res, 'Something wrong');
+    }
 
 });
 
