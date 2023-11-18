@@ -24,8 +24,6 @@ const Chatting = () => {
                 const dt = response.data.data;
                 const sortedAsc = dt.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
                 setDataChat(sortedAsc);
-
-
             }
             return response;
         } catch (error) {
@@ -68,7 +66,10 @@ const Chatting = () => {
                 fetchData();
                 setLoadingFinished(true);
                 socket.on('chat message', (msg) => {
-                    setReload(reload + 1);
+                    if (msg != null && msg.room != undefined && msg.room == pid) {
+                        setReload(reload + 1);
+                    }
+
                 });
 
             }
@@ -118,8 +119,7 @@ const Chatting = () => {
             const res = await Helper.instance().post('/api/chat/create', post);
             if (res.data.status) {
                 setMessage('');
-                socket.emit('chat message', message);
-                // setReload(reload + 1);
+                socket.emit('chat message', res.data.data);
             }
         } catch (error) {
             console.log(error);
