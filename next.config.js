@@ -9,6 +9,8 @@ const nextConfig = {
   },
   env: {
     APP_KEY: process.env.APP_KEY,
+    APP_URL: process.env.APP_URL,
+    APP_SOCKET_URL: process.env.APP_SOCKET_URL,
   },
 };
 

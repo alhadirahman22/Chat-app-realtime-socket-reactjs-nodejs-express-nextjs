@@ -1,18 +1,15 @@
-import secureLocalStorage from "react-secure-storage";
 import jwt from "jsonwebtoken"
-const getTextAlignment = (i18n) => {
-    try {
-        if (i18n.language == "ae" || i18n.language == "sa") {
-            return ("rtl")
-        } else {
-            return ("ltr")
-        }
-    } catch (error) {
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import secureLocalStorage from "react-secure-storage";
 
-    }
-    return ("ltr")
-
+const verifyJwt = (token) => {
+    return jwt.verify(token, process.env.APP_KEY);
 }
+
+const encJwt = (data) => {
+    return jwt.sign(data, process.env.APP_KEY)
+};
 
 
 const getLocalStorage = (key, initialValue, encrypt = false) => {
@@ -60,21 +57,27 @@ const removeLocalStorage = (key, encrypt = false) => {
     }
 }
 
-const verifyJwt = (token) => {
-    return jwt.verify(token, process.env.APP_KEY);
+
+const instance = () => {
+    const csrfToken = Cookies.get('csrfToken');
+    const dkey = verifyJwt(csrfToken);
+    const out = axios.create({
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': dkey.key
+            // Add any other default headers you need
+        },
+    });
+
+    return out;
 }
-
-const encJwt = (data) => {
-    return jwt.sign(data, process.env.APP_KEY)
-};
-
 const Helper = {
-    getTextAlignment,
+    verifyJwt,
+    encJwt,
+    instance,
     getLocalStorage,
     setLocalStorage,
     removeLocalStorage,
-    verifyJwt,
-    encJwt
 };
 
 export default Helper;
