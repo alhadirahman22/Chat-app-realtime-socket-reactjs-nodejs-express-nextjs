@@ -4,8 +4,37 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    restart: on-failure
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    container_name: live-chat
+    hostname: live-chat
     ports:
       - '3000:3000'
+    networks:
+            - chat-network
+
+    depends_on:
+            - mongo
+
+  mongo:
+        container_name: mongo
+        image: mongo
+        volumes:
+            - ./data:/data/db
+        ports:
+            - "27017:27017" 
+        networks:
+            - chat-network
+  nginx:
+        build:
+          context: ./nginx
+        container_name: nginx
+        hostname: nginx
+        ports:
+            - "80:80" 
+        depends_on:
+            - chat
+        networks:
+            - chat-network
+
+networks:
+  chat-network:
+    external: true
