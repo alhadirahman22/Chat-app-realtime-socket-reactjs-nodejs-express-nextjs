@@ -171,7 +171,9 @@ const Chatting = () => {
                                             item.username == usernameSess ?
                                                 <>
                                                     <div className='w-3/4 float-right mb-4' id={'cht-' + key}>
-                                                        <div className=" text-white mb-2 mt-8 sender-self px-3 py-8">
+                                                        <div className=" text-white mb-2 mt-8 sender-self px-3 py-8" style={{
+                                                            overflowWrap: "break-word"
+                                                        }}>
                                                             {item.message}
                                                         </div>
                                                     </div>
@@ -180,7 +182,9 @@ const Chatting = () => {
                                                 <>
                                                     <div className='w-3/4 float-left mb-4 relative' id={'cht-' + key}>
                                                         <p className='top-2 absolute font-bold'>{item.username}</p>
-                                                        <div className=" text-black mb-2 mt-8 sender-user px-3 py-8">
+                                                        <div className=" text-black mb-2 mt-8 sender-user px-3 py-8" style={{
+                                                            overflowWrap: "break-word"
+                                                        }}>
                                                             {item.message}
                                                         </div>
                                                     </div>
