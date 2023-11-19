@@ -21,9 +21,6 @@ WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
 ENV NODE_ENV production
@@ -36,27 +33,12 @@ WORKDIR /app
 
 RUN apk add --no-cache dumb-init
 
-# Uncomment the following line in case you want to disable telemetry during runtime.
 ENV PORT 3000
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV production
 
-# RUN addgroup --system --gid 1001 nodejs
-# RUN adduser --system --uid 1001 nextjs
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=node:node /app .
-# COPY --from=builder --chown=node:node /app/package.json ./
-# COPY --from=builder --chown=node:node /app/.env ./
-# COPY --from=builder --chown=node:node /app/server.js ./
-# COPY --from=builder --chown=node:node /app/next.config.js ./
-# COPY --from=builder --chown=node:node /app/next-i18next.config.js ./
-# COPY --from=builder --chown=node:node /app/.next/ ./.next
-# COPY --from=builder --chown=node:node /app/node_modules ./node_modules
-# COPY --from=builder --chown=node:node /app/public ./public
-# COPY --from=builder --chown=node:node /app/server ./server
-# COPY --from=builder --chown=node:node /app/utils ./utils
+
 
 USER node
 EXPOSE $PORT

@@ -31,6 +31,8 @@ Note :
 - Setup csrf token(security purposes)
 - Testing route 
 - Testing JWT token(security purposes)
+- Create Chat collection
+- Create chat and user document
 - Integration with mongodb(Database)
 - Testing to fetch api and post from client(React/Next) to server(NodeJS)
 - Real time chat using `socket.io` for integration 
@@ -41,7 +43,7 @@ Note :
 
 - What would be your approach to ensuring the application is ready for production ? 
   - Run test manually by multiple people at the same time to ensure smoothness
-  - Run load test via `k6`script and set for virtual user let say for example 100 and then test it into most heavy endpoint, if average response time is less than 5s also timeout doesnt appear and most of average response is 1s less is even better, then application is ready to production
+  - Run load test via `k6`script and set for virtual user, let say for example 100 and then test it into most heavy endpoint, if average response time is less than 5s also timeout doesnt appear and most of average response is 1s less is even better, then application is ready to production
 
 - How would you ensure a smooth user experience as 1000’s of users start using your app simultaneously?
     - Run load test via `k6`script and set for virtual user let say for example 1000 and then test it into most heavy endpoint, if average response time is less than 5s also timeout doesnt appear and most of average response is 1s less is even better
@@ -74,3 +76,4 @@ Note :
 - Time is sufficient for me to do this test
    
 ## Have feedback for how we could make this assignment better? Please let us know.
+- None
